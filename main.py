@@ -205,16 +205,18 @@ class GraphEditor:
 
 		# finding shortest paths
 		routes = []
-		for i in range(len(self.__required)):
+		for i in self.__required:
 			temp_routes = []
 			shortest = [0, 99]
 			for j in self.__required:
-				if self.__required[i] == j:
+				if i == j:
 					break
-				temp = Dijkstra(self.__required[i], j, self.places, self.distances).get_shortest_path()
+
+				temp = Dijkstra(i, j, self.places, self.distances).get_shortest_path()
 				if temp[1] < shortest[1]:
 					temp_routes.append(temp[0])
 					shortest = [len(temp_routes) - 1, temp[1]]
+
 			if temp_routes:
 				routes.append(temp_routes[shortest[0]])
 
